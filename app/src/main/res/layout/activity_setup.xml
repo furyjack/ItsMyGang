@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context=".SetupActivity">
+    tools:context=".Activity.SetupActivity">
 
 
     <TextView
@@ -79,7 +79,7 @@
         android:id="@+id/btn_continue"
         android:layout_gravity="end"
         android:layout_marginTop="140dp"
-        android:src="@drawable/ic_play_arrow_black_24dp"
+        android:src="@drawable/ic_continue"
 
 
         >
