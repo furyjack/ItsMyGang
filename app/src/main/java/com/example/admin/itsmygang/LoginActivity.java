@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btn_login);
         btnReset = (Button) findViewById(R.id.btn_reset_password);
         auth = FirebaseAuth.getInstance();
+        auth.signOut();
 
 
         btnSignup.setOnClickListener(new View.OnClickListener() {

@@ -35,6 +35,7 @@ public class SignupActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnResetPassword = (Button) findViewById(R.id.btn_reset_password);
         auth = FirebaseAuth.getInstance();
+        auth.signOut();
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
