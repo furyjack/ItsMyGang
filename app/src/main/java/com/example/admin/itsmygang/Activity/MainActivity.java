@@ -9,14 +9,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.example.admin.itsmygang.Fragments.FragmentDrawer;
 import com.example.admin.itsmygang.Fragments.GroupsFrag;
 import com.example.admin.itsmygang.Fragments.ProfileFrag;
 import com.example.admin.itsmygang.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +31,18 @@ public class MainActivity extends AppCompatActivity {
     private FragmentDrawer drawerFragment;
     private int[] tabIcons = {R.drawable.ic_account,R.drawable.ic_group
     };
+    FirebaseAuth auth=FirebaseAuth.getInstance();
+    DatabaseReference mrootref= FirebaseDatabase.getInstance().getReference();
+    DatabaseReference musersref=mrootref.child("Users");
+    DatabaseReference c_user=musersref.child(auth.getCurrentUser().getUid());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+      c_user.child("Username").setValue(auth.getCurrentUser().getDisplayName());
+
 
 
             toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -104,27 +112,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
 
 
