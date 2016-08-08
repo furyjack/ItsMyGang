@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.admin.itsmygang.Model.Grouppojo;
 import com.example.admin.itsmygang.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -54,13 +55,14 @@ public class CreateGroupFragment extends DialogFragment {
                 else
                 {
 
-                   DatabaseReference groupname=groupRef.child(username);
-                   DatabaseReference usergroup= rootref.child("Users").child(auth.getCurrentUser().getUid()).child("Groups");
-                //    usergroup.child(username).setValue(username);
-                    DatabaseReference child=usergroup.push();
-                    child.setValue(username);
-                    groupname.child("Creator").setValue(auth.getCurrentUser().getDisplayName());
-                   dismiss();
+                    Grouppojo new_group=new Grouppojo(username,auth.getCurrentUser().getDisplayName(),1,null);
+                    DatabaseReference ng=groupRef.push();
+                    new_group.setUid(ng.getKey());
+                    ng.setValue(new_group);
+                    DatabaseReference usergroup= rootref.child("Users").child(auth.getCurrentUser().getUid()).child("Groups");
+                    DatabaseReference child=usergroup.child(ng.getKey());
+                    child.setValue(new_group);
+                    dismiss();
 
 
 

@@ -51,4 +51,7 @@
     <string name="title_friends">Friends</string>
     <string name="title_home">Home</string>
     <string name="action_cg">Create Group</string>
+    <string name="action_jg">Join Group</string>
+
+
 </resources>

@@ -21,4 +21,11 @@
         android:title="@string/action_cg"
         android:orderInCategory="100"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/joingroup"
+        android:title="@string/action_jg"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
 </menu>

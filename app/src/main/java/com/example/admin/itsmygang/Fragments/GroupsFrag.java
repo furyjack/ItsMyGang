@@ -1,6 +1,7 @@
 package com.example.admin.itsmygang.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,8 +13,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.admin.itsmygang.Activity.GroupchatActivity;
+import com.example.admin.itsmygang.Model.Grouppojo;
 import com.example.admin.itsmygang.R;
 import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -32,7 +36,7 @@ public class GroupsFrag extends Fragment {
     FirebaseAuth auth=FirebaseAuth.getInstance();
     DatabaseReference mref= FirebaseDatabase.getInstance().getReference();
     DatabaseReference groups=mref.child("Users").child(auth.getCurrentUser().getUid()).child("Groups");
-
+  ProgressBar pbar;
     public GroupsFrag() {
         // Required empty public constructor
     }
@@ -52,19 +56,37 @@ public class GroupsFrag extends Fragment {
         // Inflate the layout for this fragment
         View rootview= inflater.inflate(R.layout.fragment_groups, container, false);
         RvGroups=(RecyclerView)rootview.findViewById(R.id.rv_groups);
+        pbar= (ProgressBar) rootview.findViewById(R.id.pbar);
         RvGroups.setLayoutManager(new LinearLayoutManager(getContext()));
         Firebase.setAndroidContext(getContext());
 
-        FirebaseRecyclerAdapter<String,GroupViewHolder> madapter=new FirebaseRecyclerAdapter<String, GroupViewHolder>(String.class,
+        FirebaseRecyclerAdapter<Grouppojo,GroupViewHolder> madapter=new FirebaseRecyclerAdapter<Grouppojo, GroupViewHolder>(Grouppojo.class,
                 R.layout.customlistview,GroupViewHolder.class,groups) {
             @Override
-            protected void populateViewHolder(GroupViewHolder viewHolder, String model, int position) {
-                       TextView t=  viewHolder.Text;
-                       t.setText(model);
+            protected void populateViewHolder(GroupViewHolder viewHolder, final Grouppojo model, int position) {
+                       final TextView t=  viewHolder.Text;
+                       t.setText(model.getName());
+                       t.setOnClickListener(new View.OnClickListener() {
+                          @Override
+                          public void onClick(View v) {
+                              Intent intent=new Intent(getContext(), GroupchatActivity.class);
+                              intent.putExtra("gname",model.getUid());
+                              startActivity(intent);
+                          }
+                      });
 
             }
         };
+        RecyclerView.AdapterDataObserver observer= new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                pbar.setVisibility(View.GONE);
+            }
+        };
+        madapter.registerAdapterDataObserver(observer);
         RvGroups.setAdapter(madapter);
+
 
         return rootview;
     }
