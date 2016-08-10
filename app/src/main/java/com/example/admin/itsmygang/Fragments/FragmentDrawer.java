@@ -80,7 +80,7 @@ public class FragmentDrawer extends Fragment {
         auth=FirebaseAuth.getInstance();
         Tvuser= (TextView) layout.findViewById(R.id.tv_user);
         String username=auth.getCurrentUser().getDisplayName();
-        Picasso.with(getContext()).load(auth.getCurrentUser().getPhotoUrl()).into(displayPic);
+        Picasso.with(getContext()).load(auth.getCurrentUser().getPhotoUrl()).fit().into(displayPic);
         if(!username.equals(""))
         {
             username=username.substring(0,1).toUpperCase()+username.substring(1);
