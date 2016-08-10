@@ -13,12 +13,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.admin.itsmygang.Adapters.NavigationDrawerAdapter;
 import com.example.admin.itsmygang.Model.NavDrawerItem;
 import com.example.admin.itsmygang.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,7 @@ public class FragmentDrawer extends Fragment {
     private View containerView;
     private static String[] titles = null;
     private FragmentDrawerListener drawerListener;
+    private ImageView displayPic;
     TextView Tvuser;
     FirebaseAuth auth;
 
@@ -73,9 +76,11 @@ public class FragmentDrawer extends Fragment {
         // Inflating view layout
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
+        displayPic=(ImageView)layout.findViewById(R.id.img_pr);
         auth=FirebaseAuth.getInstance();
         Tvuser= (TextView) layout.findViewById(R.id.tv_user);
         String username=auth.getCurrentUser().getDisplayName();
+        Picasso.with(getContext()).load(auth.getCurrentUser().getPhotoUrl()).into(displayPic);
         if(!username.equals(""))
         {
             username=username.substring(0,1).toUpperCase()+username.substring(1);
