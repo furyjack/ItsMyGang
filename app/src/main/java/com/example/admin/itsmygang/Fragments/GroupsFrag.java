@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,8 +32,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class GroupsFrag extends Fragment {
 
     CreateGroupFragment frag;
-    public static final String TAG="logs";
-    JoinGroupFragment fragj;
     RecyclerView RvGroups;
     FirebaseAuth auth=FirebaseAuth.getInstance();
     DatabaseReference mref= FirebaseDatabase.getInstance().getReference();
@@ -50,7 +47,6 @@ public class GroupsFrag extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         frag=new CreateGroupFragment();
-        fragj=new JoinGroupFragment();
 
     }
 
@@ -116,16 +112,7 @@ public class GroupsFrag extends Fragment {
         if (id == R.id.action_create_group)
         {
             frag.show(getFragmentManager(),"blah");
-            Log.d(TAG, "onOptionsItemSelected: cg");
 
-
-        }
-
-        if(id==R.id.joingroup)
-        {
-            Log.d(TAG, "onOptionsItemSelected: ");
-            fragj.show(getFragmentManager(),"slah");
-            Log.d(TAG, "onOptionsItemSelected: jg");
 
         }
 

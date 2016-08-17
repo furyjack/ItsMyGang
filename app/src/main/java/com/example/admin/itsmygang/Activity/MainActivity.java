@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-          c_user.child("Username").setValue(auth.getCurrentUser().getDisplayName());
+      c_user.child("Username").setValue(auth.getCurrentUser().getDisplayName());
 
 
 
