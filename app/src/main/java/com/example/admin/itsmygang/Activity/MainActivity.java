@@ -1,5 +1,6 @@
 package com.example.admin.itsmygang.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import com.example.admin.itsmygang.Fragments.FragmentDrawer;
 import com.example.admin.itsmygang.Fragments.GroupsFrag;
 import com.example.admin.itsmygang.Fragments.ProfileFrag;
 import com.example.admin.itsmygang.R;
+import com.example.admin.itsmygang.Services.MyService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
           c_user.child("Username").setValue(auth.getCurrentUser().getDisplayName());
 
-
+        startService(new Intent(this, MyService.class));
 
             toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);

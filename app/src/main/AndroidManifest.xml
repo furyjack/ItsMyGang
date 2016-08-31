@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.admin.itsmygang" >
+    package="com.example.admin.itsmygang">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".Activity.SignupActivity" >
+        android:theme="@style/AppTheme">
+        >
+        <activity android:name=".Activity.SignupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,14 +25,14 @@
 
         <service
             android:name=".Services.MyFirebaseInstanceIdService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <service
             android:name=".Services.MyFirebaseMessagingService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -39,6 +41,13 @@
         <activity
             android:name=".Activity.GroupchatActivity"
             android:parentActivityName=".Activity.MainActivity" />
+
+        <service
+            android:name=".Services.MyService"
+            android:enabled="false"
+            android:exported="false">
+
+        </service>
     </application>
 
 </manifest>
