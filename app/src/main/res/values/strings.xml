@@ -52,6 +52,7 @@
     <string name="title_home">Home</string>
     <string name="action_cg">Create Group</string>
     <string name="action_jg">Join Group</string>
+    <string name="share_id">Share id</string>
 
 
 </resources>
